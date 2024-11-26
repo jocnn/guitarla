@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 
-export default function Header({ cart }) {
+export default function Header({ cart, removeFromCart }) {
   const isEmpty = useMemo(() => cart.length === 0, [cart])
   const cartTotal = useMemo(
     () => cart.reduce((total, item) => total + item.quantity * item.price, 0),
@@ -65,7 +65,11 @@ export default function Header({ cart }) {
                               </button>
                             </td>
                             <td>
-                              <button className="btn btn-danger" type="button">
+                              <button
+                                className="btn btn-danger"
+                                type="button"
+                                onClick={() => removeFromCart(guitar.id)}
+                              >
                                 X
                               </button>
                             </td>
@@ -74,8 +78,7 @@ export default function Header({ cart }) {
                       </tbody>
                     </table>
                     <p className="text-end">
-                      Total pagar:{" "}
-                      <span className="fw-bold">${cartTotal}</span>
+                      Total pagar: <span className="fw-bold">${cartTotal}</span>
                     </p>
                   </>
                 )}

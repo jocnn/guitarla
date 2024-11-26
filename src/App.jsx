@@ -9,7 +9,7 @@ function App() {
   const [cart, setCart] = useState([])
 
   function addToCart(item) {
-    const itemExists = cart.findIndex(guitar => guitar.id === item.id)
+    const itemExists = cart.findIndex((guitar) => guitar.id === item.id)
     if (itemExists >= 0) {
       const updatedCart = [...cart]
       updatedCart[itemExists].quantity++
@@ -20,11 +20,13 @@ function App() {
     }
   }
 
+  function removeFromCart(id) {
+    setCart((prevCart) => prevCart.filter((guitar) => guitar.id !== id))
+  }
+
   return (
     <>
-      <Header
-        cart={cart}
-      />
+      <Header cart={cart} removeFromCart={removeFromCart} />
 
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
